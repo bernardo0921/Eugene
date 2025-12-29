@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}Membership - Horse Electricals and Engineering Works{% endblock %}
+
+{% block content %}
+<!-- Membership Overview -->
+<section class="membership-intro">
+    <div class="container">
+        <h2>Join Our Professional Network</h2>
+        <p>Become part of our growing community of electrical professionals and organizations. Access exclusive benefits, training resources, and networking opportunities.</p>
+    </div>
+</section>
+
+<!-- Membership Tiers -->
+<section class="membership-tiers">
+    <div class="container">
+        <h2>Membership Tiers</h2>
+        <div class="grid grid-3">
+            <!-- Partner Membership -->
+            <div class="card membership-card">
+                <div class="membership-badge">Partner</div>
+                <h3 class="card-title">Partner Membership</h3>
+                <p class="card-text">For established businesses and organizations seeking to collaborate with our team.</p>
+                <div class="membership-features">
+                    <h4>Benefits Include:</h4>
+                    <ul>
+                        <li>Priority project collaboration</li>
+                        <li>Business networking access</li>
+                        <li>Technical consultations</li>
+                        <li>Co-marketing opportunities</li>
+                        <li>Dedicated account manager</li>
+                        <li>Exclusive member events</li>
+                    </ul>
+                </div>
+                <a href="#register" class="btn btn-primary membership-register-btn" data-type="partner">Register as Partner</a>
+            </div>
+
+            <!-- Apprentice Membership -->
+            <div class="card membership-card">
+                <div class="membership-badge">Apprentice</div>
+                <h3 class="card-title">Apprentice Membership</h3>
+                <p class="card-text">For those starting their journey in electrical engineering and trades.</p>
+                <div class="membership-features">
+                    <h4>Benefits Include:</h4>
+                    <ul>
+                        <li>Hands-on training programs</li>
+                        <li>Mentorship opportunities</li>
+                        <li>Industry certifications</li>
+                        <li>Networking events</li>
+                        <li>Resource library access</li>
+                        <li>Skill development courses</li>
+                    </ul>
+                </div>
+                <a href="#register" class="btn btn-primary membership-register-btn" data-type="apprentice">Register as Apprentice</a>
+            </div>
+
+            <!-- Intern Membership -->
+            <div class="card membership-card">
+                <div class="membership-badge">Intern</div>
+                <h3 class="card-title">Intern Membership</h3>
+                <p class="card-text">For students and early-career professionals exploring the field.</p>
+                <div class="membership-features">
+                    <h4>Benefits Include:</h4>
+                    <ul>
+                        <li>Internship placements</li>
+                        <li>Educational workshops</li>
+                        <li>Career guidance</li>
+                        <li>Resume building support</li>
+                        <li>Industry insights</li>
+                        <li>Community access</li>
+                    </ul>
+                </div>
+                <a href="#register" class="btn btn-primary membership-register-btn" data-type="intern">Register as Intern</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Registration Form -->
+<section class="registration-section" id="register">
+    <div class="container">
+        <h2>Register for Membership</h2>
+        <div style="max-width: 600px; margin: 0 auto;">
+            <form method="POST" action="{% url 'register_membership' %}" class="registration-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="full_name" required placeholder="Your full name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com" />
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="(+233) 123 456 7890" />
+                </div>
+
+                <div class="form-group">
+                    <label for="membership-type">Membership Type</label>
+                    <select id="membership-type" name="membership_type" required>
+                        <option value="">-- Select Membership Type --</option>
+                        <option value="partner">Partner</option>
+                        <option value="apprentice">Apprentice</option>
+                        <option value="intern">Intern</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="organization">Organization (Optional)</label>
+                    <input type="text" id="organization" name="organization" placeholder="Your organization name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Additional Information (Optional)</label>
+                    <textarea id="message" name="message" placeholder="Tell us about yourself..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Registration</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

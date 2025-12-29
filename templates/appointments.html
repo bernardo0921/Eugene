@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Appointment - Horse Electricals and Engineering Works{% endblock %}
+
+{% block content %}
+<!-- Appointment Header -->
+<section class="appointment-header">
+    <div class="container">
+        <h2>Book an Appointment</h2>
+        <p>Schedule a consultation with our expert team. We'll respond within 24 hours to confirm your appointment.</p>
+    </div>
+</section>
+
+<!-- Appointment Booking Form -->
+<section class="appointment-section">
+    <div class="container">
+        <div style="max-width: 700px; margin: 0 auto;">
+            <form method="POST" action="{% url 'book_appointment' %}" class="appointment-form">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appt-name">Full Name</label>
+                        <input type="text" id="appt-name" name="name" required placeholder="Your full name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appt-email">Email Address</label>
+                        <input type="email" id="appt-email" name="email" required placeholder="your@email.com" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="appt-phone">Phone Number</label>
+                    <input type="tel" id="appt-phone" name="phone" required placeholder="(+233) 123 456 7890" />
+                </div>
+
+                <div class="form-group">
+                    <label for="appt-service">Service Type</label>
+                    <select id="appt-service" name="service_type" required>
+                        <option value="">-- Select a Service --</option>
+                        <option value="industrial-wiring">Industrial & Domestic Wiring</option>
+                        <option value="solar">Solar Installation & Maintenance</option>
+                        <option value="cctv">CCTV Systems</option>
+                        <option value="smart-home">Smart Home & Automation</option>
+                        <option value="satellite">Satellite Installation</option>
+                        <option value="maintenance">Electrical Maintenance & Repairs</option>
+                        <option value="consultation">General Consultation</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appt-date">Preferred Date</label>
+                        <input type="date" id="appt-date" name="appointment_date" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appt-time">Preferred Time</label>
+                        <input type="time" id="appt-time" name="appointment_time" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="appt-details">Service Details / Additional Information</label>
+                    <textarea id="appt-details" name="details" placeholder="Please describe what you need..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Book Appointment</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Help Text -->
+<section style="text-align: center; background: rgba(255, 255, 255, 0.7); border-radius: 8px; padding: 2rem;">
+    <div class="container">
+        <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">Need immediate assistance?</h3>
+        <p style="margin-bottom: 1rem;">Call us directly or reach out via WhatsApp for urgent matters.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="tel:+233123456789" class="btn btn-primary">Call Now</a>
+            <a href="https://wa.me/233123456789?text=Hello%20I%20need%20electrical%20services" target="_blank" class="btn btn-secondary">WhatsApp Chat</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

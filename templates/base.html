@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Horse Electricals and Engineering Works{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="{% url 'home' %}" class="logo-link">
+                    <img id="siteLogo" class="site-logo" src="{% static 'logo.jpeg' %}" alt="Horse Electricals & Engineering Works">
+                    <span id="logoText" class="logo-text">Horse Electricals &amp; Engineering Works</span>
+                    <noscript><span class="logo-text" style="display:inline-block">Horse Electricals &amp; Engineering Works</span></noscript>
+                </a>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                    <li><a href="{% url 'about' %}" class="nav-link">About</a></li>
+                    <li><a href="{% url 'membership' %}" class="nav-link">Membership</a></li>
+                    <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
+                    <li><a href="{% url 'appointments' %}" class="nav-link">Appointments</a></li>
+                    <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+                    {% if request.user.is_authenticated and request.user.is_staff %}
+                    <li><a href="{% url 'admin_dashboard' %}" class="nav-link">Admin Dashboard</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% if messages %}
+    <div class="messages-container" style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" style="padding: 1rem; margin-bottom: 1rem; border-radius: 0.5rem; background: {% if message.tags == 'success' %}#d1fae5{% elif message.tags == 'error' %}#fee2e2{% else %}#dbeafe{% endif %}; color: {% if message.tags == 'success' %}#065f46{% elif message.tags == 'error' %}#991b1b{% else %}#1e40af{% endif %};">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Horse Electricals and Engineering Works. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" title="Facebook">
+                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank" title="TikTok">
+                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19.498 24h-3.6v-5.602c0-1.368-.027-3.122-1.896-3.122-1.898 0-2.184 1.481-2.184 3.007V24h-3.6V9.621h3.452v1.614h.05c.482-.913 1.658-1.876 3.413-1.876 3.645 0 4.322 2.399 4.322 5.523V24zM9.339 8.005c-1.157 0-2.08-.94-2.08-2.097 0-1.156.923-2.097 2.08-2.097 1.156 0 2.08.94 2.08 2.097 0 1.157-.924 2.097-2.08 2.097zm1.782 15.995H7.557V9.621h3.564V24zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}?v=1"></script>
+</body>
+</html>
+
