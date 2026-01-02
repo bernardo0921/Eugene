@@ -3,6 +3,7 @@
     --navy-blue: #001f3f;
     --dark-blue: #0a2540;
     --royal-blue: #1e40af;
+    --primary-blue: var(--royal-blue); /* alias used in templates */
     --sky-blue: #3b82f6;
     --light-blue: #60a5fa;
     --powder-blue: #93c5fd;
@@ -470,7 +471,7 @@ section h2::after {
     position: relative;
     /* give extra top space for the badge and extra right space so text doesn't flow under it */
     padding-top: 4.5rem;
-    padding-right: 6rem; /* increased so badge won't overlap long lines */
+    padding-right: 8rem; /* increased so badge won't overlap long lines */
     background: var(--ice-blue);
     /* layout as a column so the register button can be pushed to the bottom for consistent alignment */
     display: flex;
@@ -495,46 +496,19 @@ section h2::after {
     z-index: 3; /* ensure badge floats above card content */
 }
 
-.membership-features h4 {
-    color: var(--navy-blue);
-    margin: 2rem 0 1.25rem;
-    font-size: 1.2rem;
-}
-
-.membership-features ul {
-    list-style: none;
-}
-
-.membership-features li {
-    padding: 0.75rem 0;
-    padding-left: 2rem;
-    position: relative;
-}
-
-.membership-features li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--amber);
-    font-weight: bold;
-    font-size: 1.4rem;
-    background: var(--cream-yellow);
-    width: 26px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 2px solid var(--light-yellow);
-}
-
-.membership-register-btn {
-    width: 100%;
-    /* push the button to the bottom of the card so all buttons align across cards */
-    margin-top: auto;
-    align-self: stretch;
+/* Make sure badges do not overlap content on smaller screens */
+@media (max-width: 768px) {
+    .membership-card {
+        padding-right: 1rem; /* reduce horizontal padding on small screens */
+        padding-top: 3rem;
+    }
+    .membership-badge {
+        /* switch to flow layout on small screens to avoid overlap */
+        position: static;
+        display: inline-block;
+        margin: 0 0 1rem auto;
+        transform: none;
+    }
 }
 
 /* Values List */
