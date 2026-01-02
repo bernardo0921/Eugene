@@ -3,16 +3,469 @@
 
 {% block title %}About Us - Horse Electricals and Engineering Works{% endblock %}
 
+{% block extra_css %}
+<style>
+/* ==========================================================================
+   ABOUT PAGE MOBILE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Company Overview */
+.about-overview {
+    padding: var(--space-xl) var(--space-md);
+    background: var(--pure-white);
+    border-radius: var(--radius-lg);
+    margin: var(--space-lg) 0;
+    text-align: center;
+}
+
+.about-overview h2 {
+    font-size: var(--text-2xl);
+    color: var(--navy-blue);
+    margin-bottom: var(--space-lg);
+    font-weight: 700;
+    position: relative;
+    padding-bottom: var(--space-md);
+}
+
+.about-overview h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber), var(--yellow));
+    border-radius: var(--radius-sm);
+}
+
+.about-overview p {
+    font-size: var(--text-base);
+    line-height: 1.7;
+    color: var(--gray-text);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Mission & Values */
+.mission-values {
+    padding: var(--space-xl) var(--space-md);
+    background: linear-gradient(135deg, var(--pale-blue) 0%, var(--ice-blue) 100%);
+    border-radius: var(--radius-lg);
+    margin: var(--space-lg) 0;
+}
+
+.mission-values h2 {
+    font-size: var(--text-2xl);
+    color: var(--navy-blue);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+    font-weight: 700;
+}
+
+.mission-values .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+}
+
+.values-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: var(--space-md);
+}
+
+.values-list li {
+    padding: var(--space-sm) 0;
+    padding-left: var(--space-xl);
+    position: relative;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--dark-text);
+    margin-bottom: var(--space-sm);
+}
+
+.values-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: var(--space-sm);
+    color: var(--amber);
+    font-weight: bold;
+    font-size: var(--text-lg);
+    width: 24px;
+    height: 24px;
+    background: var(--pale-yellow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.values-list strong {
+    color: var(--navy-blue);
+    font-weight: 700;
+}
+
+/* Board Members */
+.board-members {
+    padding: var(--space-xl) var(--space-md);
+    background: var(--pure-white);
+    border-radius: var(--radius-lg);
+    margin: var(--space-lg) 0;
+}
+
+.board-members h2 {
+    font-size: var(--text-2xl);
+    color: var(--navy-blue);
+    margin-bottom: var(--space-xl);
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: var(--space-md);
+}
+
+.board-members h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--amber), var(--yellow));
+    border-radius: var(--radius-sm);
+}
+
+/* CEO Card Special Styling */
+.member-card.ceo-card {
+    max-width: 400px;
+    margin: 0 auto var(--space-xl);
+    border: 2px solid var(--amber);
+    position: relative;
+}
+
+.member-card.ceo-card::before {
+    content: 'CEO';
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    background: var(--amber);
+    color: white;
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    z-index: 1;
+}
+
+/* Board Members Grid */
+.board-members .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+}
+
+.member-card {
+    background: var(--pure-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-gray);
+    transition: all 0.2s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.member-card:active {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--powder-blue);
+}
+
+.member-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: var(--space-lg);
+    border: 4px solid var(--light-blue);
+    position: relative;
+    background: var(--pale-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.member-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transition: transform 0.3s ease;
+}
+
+.member-card:active .member-img {
+    transform: scale(1.05);
+}
+
+.member-photo svg {
+    width: 80px;
+    height: 80px;
+    color: var(--royal-blue);
+    opacity: 0.7;
+}
+
+.member-card h3 {
+    font-size: var(--text-lg);
+    color: var(--navy-blue);
+    margin-bottom: var(--space-xs);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.member-role {
+    font-size: var(--text-base);
+    color: var(--royal-blue);
+    margin-bottom: var(--space-md);
+    font-weight: 600;
+}
+
+.member-card p {
+    font-size: var(--text-sm);
+    color: var(--gray-text);
+    line-height: 1.6;
+    flex: 1;
+}
+
+/* Fallback for missing images */
+.member-photo::before {
+    content: attr(data-initials);
+    position: absolute;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--royal-blue);
+    z-index: 1;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS - ABOUT PAGE
+   ========================================================================== */
+
+/* Small Phones Landscape (480px - 767px) */
+@media (min-width: 480px) {
+    .member-photo {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .member-card.ceo-card {
+        max-width: 500px;
+    }
+}
+
+/* Tablets (768px - 1023px) */
+@media (min-width: 768px) {
+    .mission-values .grid-2,
+    .board-members .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .member-photo {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .member-card.ceo-card {
+        grid-column: span 2;
+        max-width: 600px;
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        text-align: left;
+        align-items: center;
+        gap: var(--space-xl);
+        padding: var(--space-xl);
+    }
+    
+    .member-card.ceo-card .member-photo {
+        margin-bottom: 0;
+        width: 180px;
+        height: 180px;
+    }
+    
+    .member-card.ceo-card .member-info {
+        text-align: left;
+    }
+    
+    .about-overview h2,
+    .mission-values h2,
+    .board-members h2 {
+        font-size: var(--text-3xl);
+    }
+}
+
+/* Small Desktops (1024px - 1279px) */
+@media (min-width: 1024px) {
+    .board-members .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .member-card.ceo-card {
+        grid-column: span 3;
+        max-width: 800px;
+        grid-template-columns: 200px 1fr;
+    }
+    
+    .member-photo {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* Large Desktops (1280px and up) */
+@media (min-width: 1280px) {
+    .mission-values .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-xl);
+    }
+    
+    .board-members .grid-3 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .member-card.ceo-card {
+        grid-column: span 4;
+        max-width: 1000px;
+        grid-template-columns: 220px 1fr;
+    }
+    
+    .member-photo {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* ==========================================================================
+   LANDSCAPE MODE OPTIMIZATIONS
+   ========================================================================== */
+@media (max-height: 600px) and (orientation: landscape) {
+    .member-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .member-card.ceo-card {
+        padding: var(--space-lg);
+    }
+    
+    .member-card h3 {
+        font-size: var(--text-base);
+    }
+    
+    .member-role {
+        font-size: var(--text-sm);
+    }
+}
+
+/* ==========================================================================
+   FOLDABLE & VERY SMALL SCREENS
+   ========================================================================== */
+@media (max-width: 320px) {
+    .member-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .member-card {
+        padding: var(--space-md);
+    }
+    
+    .member-card h3 {
+        font-size: var(--text-base);
+    }
+    
+    .member-role {
+        font-size: var(--text-sm);
+    }
+    
+    .about-overview h2,
+    .mission-values h2,
+    .board-members h2 {
+        font-size: var(--text-xl);
+    }
+}
+
+/* ==========================================================================
+   DARK MODE SUPPORT
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    .about-overview,
+    .board-members {
+        background: #1e293b;
+        color: #e2e8f0;
+    }
+    
+    .about-overview h2,
+    .mission-values h2,
+    .board-members h2 {
+        color: #f8fafc;
+    }
+    
+    .about-overview p {
+        color: #94a3b8;
+    }
+    
+    .mission-values {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+    
+    .member-card {
+        background: #1e293b;
+        border-color: #334155;
+    }
+    
+    .member-card h3 {
+        color: #f8fafc;
+    }
+    
+    .member-role {
+        color: #60a5fa;
+    }
+    
+    .member-card p {
+        color: #94a3b8;
+    }
+    
+    .values-list li {
+        color: #e2e8f0;
+    }
+    
+    .values-list strong {
+        color: #f8fafc;
+    }
+    
+    .member-photo {
+        border-color: #475569;
+        background: #0f172a;
+    }
+    
+    .member-photo svg {
+        color: #60a5fa;
+    }
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <!-- Company Overview -->
 <section class="about-overview">
     <div class="container">
         <h2>About Horse Electricals and Engineering Works</h2>
-        <p>Horse Electrical Engineering Works is one of the best electrical leading companies in 
-Ashanti Region. Horse Electrical Engineering Works from its incorporation in the last 3years 
-has established itself as the Preferred Ally for Development in Ghana with operations in both 
-Large and Small Scale construction with over 30 well trained employees under the able 
-direction of executives and we know we are on the path of success.</p>
+        <p>Horse Electrical Engineering Works is one of the best electrical leading companies in Ashanti Region. Horse Electrical Engineering Works from its incorporation in the last 3years has established itself as the Preferred Ally for Development in Ghana with operations in both Large and Small Scale construction with over 30 well trained employees under the able direction of executives and we know we are on the path of success.</p>
     </div>
 </section>
 
@@ -23,11 +476,7 @@ direction of executives and we know we are on the path of success.</p>
         <div class="grid grid-2">
             <div class="card">
                 <h3 class="card-title">Our Mission</h3>
-                <p class="card-text">With the aim of achieving a strong leadership position in the engineering and construction 
-industry by virtue of our commitment to excellence and quality through our on-time delivery, 
-excellence services and exceeding client expectation, we pledge to deliver complete client 
-satisfaction and a constructive contribution to our community through our work and 
-accomplishments. </p>
+                <p class="card-text">With the aim of achieving a strong leadership position in the engineering and construction industry by virtue of our commitment to excellence and quality through our on-time delivery, excellence services and exceeding client expectation, we pledge to deliver complete client satisfaction and a constructive contribution to our community through our work and accomplishments.</p>
             </div>
             <div class="card">
                 <h3 class="card-title">Our Core Values</h3>
@@ -46,269 +495,161 @@ accomplishments. </p>
 <section class="board-members">
     <div class="container">
         <h2>Board Members</h2>
-        <div class="card member-card">
-                <div class="member-photo">
-                    <!-- Make sure you have an actual PNG image file at static/images/eric.png -->
-                    <img src="{% static 'images/emmanuelO.png' %}" alt="Emmanuel Owusu" class="member-img">
-                </div>
+        
+        <!-- CEO Card (Special Styling) -->
+        <div class="member-card ceo-card">
+            <div class="member-photo" data-initials="EO">
+                <img src="{% static 'images/emmanuelO.png' %}" alt="Emmanuel Owusu" class="member-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"35\" r=\"20\" fill=\"currentColor\"/><path d=\"M 20 100 Q 20 65 50 65 Q 80 65 80 100\" fill=\"currentColor\"/></svg>
+            </div>
+            <div class="member-info">
                 <h3 class="card-title">Mr Emmanuel Owusu</h3>
                 <h4 class="member-role">Founder and CEO</h4>
                 <p class="card-text">Visionary leader with 20+ years of experience in electrical engineering and Senior Engineer.</p>
             </div>
+        </div>
 
+        <!-- Board Members Grid -->
         <div class="grid grid-3">
-            <div class="card member-card">
-                <div class="member-photo">
-                    <!-- Make sure you have an actual PNG image file at static/images/eric.png -->
-                    <img src="{% static 'images/eric.png' %}" alt="Mr Eric Akomea" class="member-img">
+            <div class="member-card">
+                <div class="member-photo" data-initials="EA">
+                    <img src="{% static 'images/eric.png' %}" alt="Mr Eric Akomea" class="member-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"35\" r=\"20\" fill=\"currentColor\"/><path d=\"M 20 100 Q 20 65 50 65 Q 80 65 80 100\" fill=\"currentColor\"/></svg>
                 </div>
                 <h3 class="card-title">Mr Eric Akomea</h3>
-                <h4 class="member-role"> Safety Manager</h4>
+                <h4 class="member-role">Safety Manager</h4>
                 <p class="card-text">Visionary leader with 20+ years of experience in electrical engineering and Senior Engineer.</p>
             </div>
 
-            <div class="card member-card">
-                <div class="member-photo">
-                    <!-- Make sure you have an actual PNG image file at static/images/eric.png -->
-                    <img src="{% static 'images/gilbert.png' %}" alt="Gilbert" class="member-img">
+            <div class="member-card">
+                <div class="member-photo" data-initials="GA">
+                    <img src="{% static 'images/gilbert.png' %}" alt="Gilbert Asare" class="member-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"35\" r=\"20\" fill=\"currentColor\"/><path d=\"M 20 100 Q 20 65 50 65 Q 80 65 80 100\" fill=\"currentColor\"/></svg>
                 </div>
-                <h3 class="card-title">Mr Gilbert Asare </h3>
-                <h4 class="member-role"> Site specialist</h4>
+                <h3 class="card-title">Mr Gilbert Asare</h3>
+                <h4 class="member-role">Site Specialist</h4>
                 <p class="card-text">Visionary leader with 20+ years of experience in electrical engineering and Senior Engineer.</p>
             </div>
 
-            <div class="card member-card">
-                <div class="member-photo">
-                    <!-- Make sure you have an actual PNG image file at static/images/eric.png -->
-                    <img src="{% static 'images/emmanuel .png' %}" alt="Emmanuel" class="member-img">
+            <div class="member-card">
+                <div class="member-photo" data-initials="EA">
+                    <img src="{% static 'images/emmanuel .png' %}" alt="Emmanuel Asare" class="member-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"35\" r=\"20\" fill=\"currentColor\"/><path d=\"M 20 100 Q 20 65 50 65 Q 80 65 80 100\" fill=\"currentColor\"/></svg>
                 </div>
                 <h3 class="card-title">Mr Emmanuel Asare</h3>
                 <h4 class="member-role">Senior Technician</h4>
                 <p class="card-text">Visionary leader with 20+ years of experience in electrical engineering and Senior Engineer.</p>
             </div>
 
-            <div class="card member-card">
-                <div class="member-photo">
-                    <!-- Make sure you have an actual PNG image file at static/images/eric.png -->
-                    <img src="{% static 'images/richard.png' %}" alt="Richard" class="member-img">
+            <div class="member-card">
+                <div class="member-photo" data-initials="RD">
+                    <img src="{% static 'images/richard.png' %}" alt="Richard Akwasi Darkwa" class="member-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"35\" r=\"20\" fill=\"currentColor\"/><path d=\"M 20 100 Q 20 65 50 65 Q 80 65 80 100\" fill=\"currentColor\"/></svg>
                 </div>
                 <h3 class="card-title">Mr Richard Akwasi Darkwa</h3>
                 <h4 class="member-role">Site Engineer</h4>
                 <p class="card-text">Visionary leader with 20+ years of experience in electrical engineering and Senior Engineer.</p>
             </div>
-
-           
-
-            
-            
         </div>
     </div>
 </section>
 
-<style>
-/* Add these styles to your existing CSS file */
-.board-members {
-    padding: 3rem 0;
-    background-color: #f9f9f9;
-}
-
-.member-card {
-    text-align: center;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.member-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.member-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 0 auto 1.5rem;
-    border: 4px solid var(--primary-blue, #336699);
-    background-color: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-.member-photo svg {
-    width: 100px;
-    height: 100px;
-}
-
-.member-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-}
-
-.member-role {
-    color: var(--primary-blue, #336699);
-    margin: 0.5rem 0 1rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-.card-title {
-    margin-bottom: 0.5rem;
-    color: #333;
-    font-size: 1.3rem;
-}
-
-.card-text {
-    color: #666;
-    line-height: 1.6;
-    flex: 1;
-}
-
-/* Grid styling */
-.grid-3 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.grid-2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-}
-
-/* Mission & Values section */
-.mission-values {
-    padding: 3rem 0;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-.values-list {
-    text-align: left;
-    padding-left: 1.5rem;
-    line-height: 1.8;
-}
-
-.values-list li {
-    margin-bottom: 0.8rem;
-}
-
-/* About Overview */
-.about-overview {
-    padding: 3rem 0;
-}
-
-.about-overview h2 {
-    color: var(--primary-blue, #336699);
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.about-overview p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 2.5rem;
-    color: #333;
-    font-size: 2.2rem;
-    position: relative;
-}
-
-h2::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: var(--primary-blue, #336699);
-    margin: 0.8rem auto;
-    border-radius: 2px;
-}
-
-@media (max-width: 768px) {
-    .grid-3,
-    .grid-2 {
-        grid-template-columns: 1fr;
-    }
-    
-    .member-photo {
-        width: 180px;
-        height: 180px;
-    }
-    
-    h2 {
-        font-size: 1.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .member-photo {
-        width: 150px;
-        height: 150px;
-    }
-}
-</style>
-
 <script>
-// Fallback image handler and cropping adjustment
+// Image optimization and fallback handling
 document.addEventListener('DOMContentLoaded', function() {
-    const ericImage = document.querySelector('.member-img');
+    // Image optimization
+    const memberImages = document.querySelectorAll('.member-img');
     
-    if (ericImage) {
-        // Fallback if image fails to load
-        ericImage.onerror = function() {
-            console.log('Image failed to load, using SVG fallback');
-            this.style.display = 'none';
-            const svgHTML = `<svg viewBox="0 0 100 100" fill="#336699" style="width: 100px; height: 100px;">
-                <circle cx="50" cy="35" r="20"/>
-                <path d="M 20 100 Q 20 65 50 65 Q 80 65 80 100"/>
-                <text x="50" y="55" text-anchor="middle" fill="white" font-size="12" font-weight="bold">EA</text>
-            </svg>`;
-            this.parentElement.innerHTML = svgHTML;
-        };
+    memberImages.forEach(img => {
+        // Add loading lazy for better performance
+        img.loading = 'lazy';
         
-        // Adjust object-position based on image aspect ratio
-        setTimeout(function() {
-            if (ericImage.naturalWidth > 0 && ericImage.naturalHeight > 0) {
-                const aspectRatio = ericImage.naturalWidth / ericImage.naturalHeight;
+        // Adjust object-position for better cropping
+        img.onload = function() {
+            if (this.naturalWidth > 0 && this.naturalHeight > 0) {
+                const aspectRatio = this.naturalWidth / this.naturalHeight;
                 
-                // If image is wider than tall (landscape), adjust vertical position
-                if (aspectRatio > 1.2) {
-                    ericImage.style.objectPosition = 'center 25%';
-                }
-                // If image is taller than wide (portrait), adjust horizontal position
-                else if (aspectRatio < 0.8) {
-                    ericImage.style.objectPosition = '50% center';
-                }
-                // Square image, keep center
-                else {
-                    ericImage.style.objectPosition = 'center center';
+                // Adjust cropping based on aspect ratio
+                if (aspectRatio > 1.2) { // Landscape
+                    this.style.objectPosition = 'center 25%';
+                } else if (aspectRatio < 0.8) { // Portrait
+                    this.style.objectPosition = 'center 30%';
+                } else { // Square
+                    this.style.objectPosition = 'center center';
                 }
             }
-        }, 500);
-    }
+        };
+        
+        // Set initial position
+        img.style.objectPosition = 'center center';
+    });
+    
+    // Touch optimization for member cards
+    const memberCards = document.querySelectorAll('.member-card');
+    
+    memberCards.forEach(card => {
+        let touchStartY = 0;
+        
+        card.addEventListener('touchstart', function(e) {
+            touchStartY = e.touches[0].clientY;
+            this.style.transition = 'none';
+        }, { passive: true });
+        
+        card.addEventListener('touchmove', function(e) {
+            const touchY = e.touches[0].clientY;
+            const diff = touchStartY - touchY;
+            
+            if (Math.abs(diff) > 10) {
+                this.style.transform = `translateY(${Math.max(-4, diff * 0.1)}px)`;
+            }
+        }, { passive: true });
+        
+        card.addEventListener('touchend', function() {
+            this.style.transition = 'all 0.2s ease';
+            this.style.transform = 'translateY(0)';
+        }, { passive: true });
+    });
+    
+    // Display initials if image fails to load
+    memberImages.forEach(img => {
+        img.addEventListener('error', function() {
+            const photoContainer = this.parentElement;
+            const initials = photoContainer.getAttribute('data-initials') || '';
+            
+            // Create SVG fallback
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("viewBox", "0 0 100 100");
+            svg.style.width = "100%";
+            svg.style.height = "100%";
+            
+            // Create circle for head
+            const circle = document.createElementNS(svgNS, "circle");
+            circle.setAttribute("cx", "50");
+            circle.setAttribute("cy", "35");
+            circle.setAttribute("r", "20");
+            circle.setAttribute("fill", "currentColor");
+            svg.appendChild(circle);
+            
+            // Create path for body
+            const path = document.createElementNS(svgNS, "path");
+            path.setAttribute("d", "M 20 100 Q 20 65 50 65 Q 80 65 80 100");
+            path.setAttribute("fill", "currentColor");
+            svg.appendChild(path);
+            
+            // Add initials if available
+            if (initials) {
+                const text = document.createElementNS(svgNS, "text");
+                text.setAttribute("x", "50");
+                text.setAttribute("y", "42");
+                text.setAttribute("text-anchor", "middle");
+                text.setAttribute("fill", "white");
+                text.setAttribute("font-size", "14");
+                text.setAttribute("font-weight", "bold");
+                text.textContent = initials;
+                svg.appendChild(text);
+            }
+            
+            // Clear container and append SVG
+            photoContainer.innerHTML = '';
+            photoContainer.appendChild(svg);
+        });
+    });
 });
 </script>
 {% endblock %}
