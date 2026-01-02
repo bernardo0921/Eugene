@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Services - Horse Electricals and Engineering Works{% endblock %}
 
@@ -130,6 +131,135 @@
         </div>
     </div>
 </section>
+
+<!-- Photo Gallery Section -->
+<section class="photo-gallery">
+    <div class="container">
+        <h2>Our Work Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item gallery-large">
+                <img src="{% static 'images/gallery1.png' %}" alt="Project 1">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery2.png' %}" alt="Project 2">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery3.png' %}" alt="Project 3">
+            </div>
+            <div class="gallery-item gallery-tall">
+                <img src="{% static 'images/gallery4.png' %}" alt="Project 4">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery5.png' %}" alt="Project 5">
+            </div>
+            <div class="gallery-item gallery-wide">
+                <img src="{% static 'images/gallery6.png' %}" alt="Project 6">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery7.png' %}" alt="Project 7">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery8.png' %}" alt="Project 8">
+            </div>
+            <div class="gallery-item gallery-tall">
+                <img src="{% static 'images/gallery9.png' %}" alt="Project 9">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery10.png' %}" alt="Project 10">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery11.png' %}" alt="Project 11">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery12.png' %}" alt="Project 12">
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Masonry Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 200px;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+/* Gallery Item Styling */
+.gallery-item {
+    background: var(--pure-white);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 31, 63, 0.12);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid var(--border-gray);
+    border-top: 5px solid var(--bright-yellow);
+    position: relative;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(30, 64, 175, 0.2);
+    border-top-color: var(--royal-blue);
+    border-color: var(--powder-blue);
+    z-index: 10;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Different size variations for masonry effect */
+.gallery-large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.gallery-wide {
+    grid-column: span 2;
+}
+
+.gallery-tall {
+    grid-row: span 2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 150px;
+    }
+    
+    .gallery-large,
+    .gallery-wide {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 200px;
+    }
+    
+    .gallery-large,
+    .gallery-wide,
+    .gallery-tall {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+}
+</style>
 
 <!-- CTA Section -->
 <section class="services-cta">
