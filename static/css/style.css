@@ -1542,101 +1542,532 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 /* ==========================================================================
-   DARK MODE SUPPORT
+   IMPROVED DARK MODE WITH BETTER COLOR BALANCE
    ========================================================================== */
+
 @media (prefers-color-scheme: dark) {
+    /* Base Colors */
+    :root {
+        --dark-bg-primary: #0f172a;
+        --dark-bg-secondary: #1e293b;
+        --dark-bg-tertiary: #334155;
+        --dark-surface: #1e293b;
+        --dark-surface-elevated: #334155;
+        
+        --dark-text-primary: #f1f5f9;
+        --dark-text-secondary: #cbd5e1;
+        --dark-text-muted: #94a3b8;
+        
+        --dark-border: #334155;
+        --dark-border-light: #475569;
+        
+        --dark-accent-blue: #60a5fa;
+        --dark-accent-blue-hover: #3b82f6;
+        --dark-accent-yellow: #fbbf24;
+        --dark-accent-yellow-hover: #f59e0b;
+    }
+    
+    /* Body & Base Elements */
     body {
-        background: #0f172a;
-        color: #e2e8f0;
+        background: var(--dark-bg-primary);
+        color: var(--dark-text-primary);
     }
     
+    /* Header */
     .header {
-        background: #1e293b;
-        border-bottom-color: #f59e0b;
+        background: var(--dark-surface);
+        border-bottom-color: var(--dark-accent-yellow);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     }
     
+    .logo-text {
+        color: var(--dark-text-primary);
+    }
+    
+    .menu-toggle {
+        color: var(--dark-accent-blue);
+        background: transparent;
+    }
+    
+    .menu-toggle:active {
+        background: var(--dark-bg-tertiary);
+    }
+    
+    /* Navigation */
+    .navbar {
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(12px);
+    }
+    
+    .nav-links li {
+        border-bottom-color: var(--dark-border);
+    }
+    
+    .nav-link {
+        color: var(--dark-text-secondary);
+    }
+    
+    .nav-link:active,
+    .nav-link.active {
+        background: var(--dark-bg-tertiary);
+        color: var(--dark-accent-blue);
+    }
+    
+    .nav-link.active::after {
+        background: var(--dark-accent-yellow);
+    }
+    
+    /* Cards */
     .card,
     .service-card,
-    .member-card,
-    .about-overview,
-    .board-members {
-        background: #1e293b;
-        border-color: #334155;
-        color: #e2e8f0;
+    .member-card {
+        background: var(--dark-surface);
+        border-color: var(--dark-border);
+        border-top-color: var(--dark-accent-yellow);
+        color: var(--dark-text-primary);
+    }
+    
+    .card:active,
+    .service-card:active,
+    .member-card:active {
+        border-color: var(--dark-border-light);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4);
     }
     
     .card-title,
-    .service-title,
     .member-card h3 {
-        color: #f8fafc;
+        color: var(--dark-text-primary);
     }
     
     .card-text,
-    .service-description,
-    .member-card p,
-    .about-overview p {
-        color: #94a3b8;
+    .member-card p {
+        color: var(--dark-text-muted);
+    }
+    
+    /* Buttons */
+    .btn-primary {
+        background: linear-gradient(135deg, var(--dark-accent-blue), #2563eb);
+        border-color: var(--dark-accent-blue);
+        color: white;
+    }
+    
+    .btn-primary:active {
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+    }
+    
+    .btn-secondary {
+        background: var(--dark-surface-elevated);
+        color: var(--dark-accent-blue);
+        border-color: var(--dark-accent-blue);
+    }
+    
+    .btn-secondary:active {
+        background: var(--dark-bg-tertiary);
+    }
+    
+    /* Forms */
+    .form-group label {
+        color: var(--dark-text-primary);
     }
     
     .form-group input,
     .form-group select,
     .form-group textarea {
-        background: #1e293b;
-        border-color: #475569;
-        color: #e2e8f0;
+        background: var(--dark-surface-elevated);
+        border-color: var(--dark-border);
+        color: var(--dark-text-primary);
     }
     
     .form-group input::placeholder,
     .form-group textarea::placeholder {
-        color: #94a3b8;
+        color: var(--dark-text-muted);
     }
     
-    .navbar {
-        background: rgba(30, 41, 59, 0.98);
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: var(--dark-accent-blue);
+        background: var(--dark-bg-tertiary);
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
     }
     
-    .nav-link {
-        color: #e2e8f0;
+    /* Section Headers */
+    .section-header,
+    .hero {
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%);
+        color: var(--dark-text-primary);
     }
     
-    .nav-link.active {
-        background: rgba(96, 165, 250, 0.1);
+    .section-header h2,
+    .hero h2 {
+        color: var(--dark-text-primary);
     }
     
-    .photo-gallery {
-        background: #0f172a;
+    .section-header p,
+    .hero p {
+        color: var(--dark-text-secondary);
+        opacity: 1;
     }
     
-    .contact-map iframe {
-        filter: brightness(0.8) contrast(1.2);
+    /* About Page */
+    .about-overview,
+    .board-members {
+        background: var(--dark-surface);
+        color: var(--dark-text-primary);
     }
     
+    .about-overview h2,
+    .board-members h2 {
+        color: var(--dark-text-primary);
+    }
+    
+    .about-overview h2::after,
+    .board-members h2::after {
+        background: linear-gradient(90deg, var(--dark-accent-yellow), #f59e0b);
+    }
+    
+    .about-overview p {
+        color: var(--dark-text-secondary);
+    }
+    
+    /* Mission & Values */
     .mission-values {
-        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        background: linear-gradient(135deg, var(--dark-surface) 0%, var(--dark-bg-primary) 100%);
     }
     
-    .member-role {
-        color: #60a5fa;
+    .mission-values h2 {
+        color: var(--dark-text-primary);
     }
     
     .values-list li {
-        color: #e2e8f0;
+        color: var(--dark-text-secondary);
+    }
+    
+    .values-list li::before {
+        color: var(--dark-accent-yellow);
+        background: rgba(251, 191, 36, 0.15);
     }
     
     .values-list strong {
-        color: #f8fafc;
+        color: var(--dark-text-primary);
+    }
+    
+    /* Member Cards */
+    .member-card.ceo-card {
+        border-color: var(--dark-accent-yellow);
+    }
+    
+    .member-card.ceo-card::before {
+        background: var(--dark-accent-yellow);
+        color: var(--dark-bg-primary);
     }
     
     .member-photo {
-        border-color: #475569;
-        background: #0f172a;
+        border-color: var(--dark-border-light);
+        background: var(--dark-bg-tertiary);
     }
     
     .member-photo svg {
-        color: #60a5fa;
+        color: var(--dark-accent-blue);
+        opacity: 0.8;
+    }
+    
+    .member-role {
+        color: var(--dark-accent-blue);
+    }
+    
+    /* Service Icons */
+    .card-icon,
+    .service-icon {
+        background: rgba(251, 191, 36, 0.15);
+    }
+    
+    .card-icon svg,
+    .service-icon svg {
+        color: var(--dark-accent-yellow);
+    }
+    
+    /* Service Features */
+    .service-features li::before {
+        color: var(--dark-accent-yellow);
+    }
+    
+    /* CTA Sections */
+    .cta-section,
+    .quick-contact {
+        background: var(--dark-surface);
+    }
+    
+    .cta-section h2,
+    .quick-contact h2 {
+        color: var(--dark-text-primary);
+    }
+    
+    .cta-section p {
+        color: var(--dark-text-secondary);
+    }
+    
+    .services-cta {
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
+        border: 1px solid var(--dark-border);
+    }
+    
+    .services-cta h2,
+    .services-cta p {
+        color: var(--dark-text-primary);
+    }
+    
+    /* Gallery */
+    .photo-gallery {
+        background: var(--dark-bg-primary);
+    }
+    
+    .gallery-item {
+        border-color: var(--dark-border);
+        border-top-color: var(--dark-accent-yellow);
+    }
+    
+    .gallery-item:hover {
+        border-color: var(--dark-border-light);
+        border-top-color: var(--dark-accent-blue);
+    }
+    
+    /* Membership */
+    .membership-badge {
+        background: var(--dark-accent-yellow);
+        color: var(--dark-bg-primary);
+    }
+    
+    .membership-features h4 {
+        color: var(--dark-text-primary);
+    }
+    
+    .membership-features li {
+        color: var(--dark-text-secondary);
+    }
+    
+    .membership-features li::before {
+        color: var(--dark-accent-yellow);
+    }
+    
+    /* Contact Page */
+    .contact-header,
+    .appointment-header {
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%);
+    }
+    
+    .contact-info h3,
+    .contact-map h3 {
+        color: var(--dark-text-primary);
+    }
+    
+    .contact-item h4 {
+        color: var(--dark-text-primary);
+    }
+    
+    .contact-item p {
+        color: var(--dark-text-secondary);
+    }
+    
+    .contact-item a {
+        color: var(--dark-accent-blue);
+    }
+    
+    .contact-item a:active {
+        color: var(--dark-accent-blue-hover);
+    }
+    
+    .contact-map iframe {
+        filter: brightness(0.85) contrast(1.1) saturate(0.9);
+        border: 1px solid var(--dark-border);
+    }
+    
+    /* Admin Dashboard */
+    .admin-data h3 {
+        color: var(--dark-text-primary);
+    }
+    
+    .admin-data table {
+        background: var(--dark-surface);
+    }
+    
+    .admin-data th {
+        background: var(--dark-bg-tertiary);
+        color: var(--dark-text-primary);
+        border-bottom-color: var(--dark-border-light);
+    }
+    
+    .admin-data td {
+        border-bottom-color: var(--dark-border);
+        color: var(--dark-text-secondary);
+    }
+    
+    .table-container {
+        background: var(--dark-surface);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Footer */
+    .footer {
+        background: var(--dark-bg-secondary);
+        border-top-color: var(--dark-accent-yellow);
+    }
+    
+    .footer-content p {
+        color: var(--dark-text-secondary);
+    }
+    
+    .social-links a {
+        background: rgba(96, 165, 250, 0.15);
+        border-color: transparent;
+    }
+    
+    .social-links a:active {
+        background: var(--dark-accent-yellow);
+        border-color: var(--dark-accent-yellow);
+    }
+    
+    .social-icon {
+        color: var(--dark-accent-blue);
+    }
+    
+    .social-links a:active .social-icon {
+        color: var(--dark-bg-primary);
+    }
+    
+    /* Alerts & Messages */
+    .alert-success {
+        background: rgba(16, 185, 129, 0.15);
+        color: #6ee7b7;
+        border-color: rgba(16, 185, 129, 0.3);
+    }
+    
+    .alert-error {
+        background: rgba(239, 68, 68, 0.15);
+        color: #fca5a5;
+        border-color: rgba(239, 68, 68, 0.3);
+    }
+    
+    .alert-info {
+        background: rgba(96, 165, 250, 0.15);
+        color: #93c5fd;
+        border-color: rgba(96, 165, 250, 0.3);
+    }
+    
+    /* Help Section */
+    .help-section {
+        background: var(--dark-surface);
+    }
+    
+    .help-section h3 {
+        color: var(--dark-accent-blue);
+    }
+    
+    /* Appointment Form */
+    .appointment-form {
+        background: var(--dark-surface);
+        border: 1px solid var(--dark-border);
+    }
+    
+    /* Registration Section */
+    .registration-section {
+        background: transparent;
+    }
+    
+    .registration-section h2 {
+        color: var(--dark-text-primary);
+    }
+    
+    .registration-form {
+        background: var(--dark-surface);
+        padding: var(--space-lg);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Membership Intro */
+    .membership-intro,
+    .services-header {
+        background: linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%);
+        color: var(--dark-text-primary);
+        padding: var(--space-xl) var(--space-md);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--space-lg);
+    }
+    
+    .membership-intro h2,
+    .services-header h2 {
+        color: var(--dark-text-primary);
+    }
+    
+    .membership-intro p,
+    .services-header p {
+        color: var(--dark-text-secondary);
     }
 }
 
+/* ==========================================================================
+   RESPONSIVE DARK MODE ADJUSTMENTS
+   ========================================================================== */
+
+/* Tablets and up - Enhance contrast for larger screens */
+@media (min-width: 768px) and (prefers-color-scheme: dark) {
+    .card:hover,
+    .service-card:hover,
+    .member-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.5);
+        border-color: var(--dark-border-light);
+    }
+    
+    .gallery-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.5);
+        border-top-color: var(--dark-accent-blue);
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Desktop - Full hover effects */
+@media (min-width: 1024px) and (prefers-color-scheme: dark) {
+    .nav-link:hover {
+        background: var(--dark-bg-tertiary);
+        color: var(--dark-accent-blue);
+    }
+    
+    .social-links a:hover {
+        background: var(--dark-accent-yellow);
+        transform: scale(1.1);
+    }
+    
+    .social-links a:hover .social-icon {
+        color: var(--dark-bg-primary);
+    }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) and (prefers-color-scheme: dark) {
+    :root {
+        --dark-text-primary: #ffffff;
+        --dark-text-secondary: #e2e8f0;
+        --dark-border: #475569;
+        --dark-border-light: #64748b;
+    }
+    
+    .card,
+    .service-card,
+    .member-card {
+        border-width: 2px;
+    }
+    
+    .btn {
+        border-width: 3px;
+    }
+}
 /* ==========================================================================
    REDUCED MOTION PREFERENCES
    ========================================================================== */
