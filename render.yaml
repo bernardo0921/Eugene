@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: horse-site
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn horse_site.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: WEB_CONCURRENCY
+        value: 4
+    
+  - type: postgres
+    name: horse-site-db
+    databaseName: horse_site_db
+    user: horse_site_user
+    ipAllowList: []
