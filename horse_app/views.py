@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import AppointmentForm, MembershipForm, ContactMessageForm
 from django.db.models import Count
+from django.conf import settings
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # Page views
 def home(request):
@@ -283,3 +286,26 @@ def handler404(request, exception=None):
 
 def handler500(request):
     return render(request, '500.html', status=500)
+
+# Temporary admin creation view (development-only)
+def temp_admin_create(request):
+    # Only allow this in development to avoid security risk in production
+    if not settings.DEBUG:
+        return HttpResponseForbidden('This endpoint is disabled in production.')
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        email = request.POST.get('email', '').strip()
+        if form.is_valid():
+            user = form.save(commit=False)
+            # mark as admin/staff
+            user.is_staff = True
+            user.is_superuser = True
+            if email:
+                user.email = email
+            user.save()
+            messages.success(request, 'Admin user created successfully. You can now sign in.')
+            return redirect('admin_login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'admin/create_admin.html', {'form': form})

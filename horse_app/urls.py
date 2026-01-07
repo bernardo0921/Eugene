@@ -12,6 +12,9 @@ urlpatterns = [
     path('admin-login/', views.admin_login, name='admin_login'),
     path('admin-logout/', views.admin_logout, name='admin_logout'),
 
+    # Temporary dev-only admin creation
+    path('admin/create/', views.temp_admin_create, name='temp_admin_create'),
+
     # CRUD: Appointments
     path('admin/appointments/create/', views.appointment_create, name='appointment_create'),
     path('admin/appointments/<int:pk>/edit/', views.appointment_edit, name='appointment_edit'),
