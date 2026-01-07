@@ -14,25 +14,36 @@ from django.contrib.messages import constants as messages
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY SETTINGS
+# Detect if we're running on Render (Render sets the RENDER env var)
+RENDER = os.environ.get('RENDER', 'False') == 'True'
+
+# DEBUG should default to True for local development and False on Render unless explicitly set
+DEBUG = os.environ.get('DEBUG', 'True' if not RENDER else 'False') == 'True'
+
+# SECRET_KEY handling: prefer environment variable in production; allow a safe dev key for local runs
 SECRET_KEY = os.environ.get('SECRET_KEY')
 if not SECRET_KEY:
-    raise ValueError("SECRET_KEY environment variable must be set in Render")
+    if DEBUG:
+        # Local development default (not for production) — change this per-developer if needed
+        SECRET_KEY = 'dev-secret-change-me'
+    else:
+        raise ValueError("SECRET_KEY environment variable must be set in Render")
 
-# DEBUG should be False in production
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+# ALLOWED_HOSTS configuration
+if DEBUG:
+    # Allow localhost during development
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", "192.168.100.21"]
+else:
+    ALLOWED_HOSTS = []
 
-# Render provides the RENDER environment variable
-RENDER = os.environ.get('RENDER', False)
-
-# ALLOWED_HOSTS configuration for Render
-ALLOWED_HOSTS = []
+# Add Render external hostname if provided
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
-# Add any custom domains you've configured
+# Add any custom domains you've configured via the ALLOWED_HOSTS env var (comma-separated)
 if os.environ.get('ALLOWED_HOSTS'):
-    ALLOWED_HOSTS.extend(os.environ.get('ALLOWED_HOSTS').split(','))
+    ALLOWED_HOSTS.extend([h.strip() for h in os.environ.get('ALLOWED_HOSTS').split(',') if h.strip()])
 
 # Security Settings for Production on Render
 if RENDER:
@@ -51,7 +62,7 @@ if RENDER:
 
 # Application definition
 INSTALLED_APPS = [
-    'django.contrib.admin',
+#     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -128,8 +139,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-# WhiteNoise configuration for compressed static file serving
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Only use the compressed manifest storage in production (requires collectstatic)
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files - For Render, consider using external storage like AWS S3
 MEDIA_URL = '/media/'
@@ -186,6 +198,10 @@ LOGGING = {
 # Admin notifications
 ADMINS = [('Admin', os.environ.get('ADMIN_EMAIL', 'admin@example.com'))]
 MANAGERS = ADMINS
+
+# Admin login redirect settings
+LOGIN_URL = '/admin-login/'
+LOGIN_REDIRECT_URL = '/admin-dashboard/'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
