@@ -5,23 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9fe2240-32ae-439e-85fb-c2272ca7d3a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/horse_app/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/analytics.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/crud/appointment_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/crud/confirm_delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/crud/contact_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/crud/membership_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin_login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/500.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/horse_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/horse_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/horse_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/horse_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/horse_site/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/horse_site/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/horse_site/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/horse_site/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/contact.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -276,3 +276,10 @@ def contact_form(request):
             messages.error(request, 'There was an error sending your message. Please try again.')
             return redirect('contact')
     return redirect('contact')
+
+def handler404(request, exception=None):
+    return render(request, '404.html', status=404)
+
+
+def handler500(request):
+    return render(request, '500.html', status=500)
