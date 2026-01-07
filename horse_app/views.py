@@ -9,6 +9,7 @@ from django.db.models import Count
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+import os
 
 # Page views
 def home(request):
@@ -287,15 +288,24 @@ def handler404(request, exception=None):
 def handler500(request):
     return render(request, '500.html', status=500)
 
-# Temporary admin creation view (development-only)
+# Temporary admin creation view (development-only or token-protected in production)
 def temp_admin_create(request):
-    # Only allow this in development to avoid security risk in production
-    if not settings.DEBUG:
+    # If not in DEBUG, require a TEMP_ADMIN_TOKEN env var to be set to enable this endpoint
+    token_env = os.environ.get('TEMP_ADMIN_TOKEN')
+    if not settings.DEBUG and not token_env:
         return HttpResponseForbidden('This endpoint is disabled in production.')
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         email = request.POST.get('email', '').strip()
+        provided_token = request.POST.get('token', '').strip()
+
+        # If running in production (DEBUG False), validate token
+        if not settings.DEBUG:
+            if not provided_token or provided_token != token_env:
+                messages.error(request, 'Invalid or missing token. Admin creation is disabled.')
+                return redirect('temp_admin_create')
+
         if form.is_valid():
             user = form.save(commit=False)
             # mark as admin/staff
